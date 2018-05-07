@@ -1,0 +1,18 @@
+group 'com.motian'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+//依赖的中心仓库----在哪里找依赖
+repositories {
+    mavenCentral()//指定为maven中心仓库
+}
+
+//所需的依赖
+dependencies {
+    compile 'org.springframework:spring-core:5.0.5.RELEASE'
+    compile 'org.springframework:spring-context:5.0.5.RELEASE'
+    testCompile 'junit:junit:4.12'
+}

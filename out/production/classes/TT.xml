@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd"
+       xmlns:p="http://www.springframework.org/schema/p"
+       default-init-method="init" default-destroy-method="destioy">    <!--为所有的bean创建默认的初始化与销毁方法-->
+
+    <bean id="song" class="Server.songS"></bean>
+    <!--factory-method工厂方法注入-->
+    <bean id="mo" class="Model.mo" factory-method="getIn"/>
+    <bean id="mo1" class="Model.mo" factory-method="getIn" autowire-candidate="false"/>
+    <!--scope属性  指定bean的作用域（默认时单利的）-->
+    <!--<bean id="user" class="Model.Students" scope="prototype">-->
+        <!--&lt;!&ndash;构造函数注入&ndash;&gt;-->
+        <!--<constructor-arg value="20"/>-->
+        <!--<constructor-arg name="s" ref="song"/>-->
+        <!--<constructor-arg ref="mo"/>-->
+    <!--</bean>-->
+    <!--init-method与destroy-method属性指定初始化和销毁的方法-->
+    <bean id="initDes" class="Server.InitDes" init-method="init"
+          destroy-method="destioy"/>
+
+    <!--setter注入  使用p标签(适用于getset方法)-->
+    <bean id="teacher2" class="Model.Teacher" p:age="12" p:name="tianmo" autowire="byName"/>
+        <!--将与该属性的name相同的bean的id自动注入    限制只能装配与id名称一直的 -->
+    <bean id="teacher1" class="Model.Teacher" p:age="21" p:name="motian" autowire="byType"/>
+    <!--将与该属性的类型相同的bean的类型自动注入    限制如果存在多个同类型的bean 就会抛出异常
+                    或者设置该bean的autowire-candidate为false即为取消候选 -->
+
+    <bean id="stu2" class="Model.Stu2" autowire="constructor"/>
+        <!--构造函数自动装入     spring会自动查看Stu2的构造器 若果找到bean-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--使用SpEL表达式-->
+    <bean id="coder" class="Model.Coder">
+        <!--使用T()运算符    T(ClassName)  会产生当前类的一个对象   从而可以调用静态方法与属性-->
+        <property name="age" value="#{T(java.lang.Math).PI}"/>
+        <!--安全存取器   ?.如果为空则停止-->
+        <property name="name" value="#{teacher1.getN()?.toUpperCase()}"/>
+        <property name="sex" value="#{'s'}"/>
+    </bean>
+
+
+</beans>
