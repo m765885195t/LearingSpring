@@ -4,13 +4,14 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                         http://www.springframework.org/schema/beans/spring-beans.xsd"
        xmlns:p="http://www.springframework.org/schema/p"
-       default-init-method="init" default-destroy-method="destioy">    <!--为所有的bean创建默认的初始化与销毁方法-->
+       default-autowire="byType"  default-init-method="init" default-destroy-method="destioy">
+    <!-- 默认使用自动类型装配  为所有的bean创建默认的初始化与销毁方法-->
 
     <bean id="song" class="Server.songS"></bean>
     <!--factory-method工厂方法注入-->
     <bean id="mo" class="Model.mo" factory-method="getIn"/>
     <bean id="mo1" class="Model.mo" factory-method="getIn" autowire-candidate="false"/>
-    <!--scope属性  指定bean的作用域（默认时单利的）-->
+    <!--scope属性  指定bean的作用域（默认的bean为单例的    prototype每次产生新的实例）-->
     <bean id="user" class="Model.Students" scope="prototype">
         <!--构造函数注入-->
         <constructor-arg value="20"/>
@@ -23,7 +24,7 @@
 
     <!--setter注入  使用p标签(适用于getset方法)-->
     <bean id="teacher2" class="Model.Teacher" p:age="12" p:name="tianmo" autowire="byName"/>
-        <!--将与该属性的name相同的bean的id自动注入    限制只能装配与id名称一直的 -->
+        <!--将与该属性的name相同的bean的id自动注入    限制只能装配与id名称一样的 -->
     <bean id="teacher1" class="Model.Teacher" p:age="21" p:name="motian" autowire="byType"/>
     <!--将与该属性的类型相同的bean的类型自动注入    限制如果存在多个同类型的bean 就会抛出异常
                     或者设置该bean的autowire-candidate为false即为取消候选 -->
