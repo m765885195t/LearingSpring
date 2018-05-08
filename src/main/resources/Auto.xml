@@ -10,9 +10,10 @@
     <!--激活自动注解   减少配置的参数       但还需要手动配置bean-->
     <!--<context:annotation-config />-->
     <!--<bean id="autoStu" class="Model.AutoStu"/>-->
-    <!--<bean id="song" class="Server.songS"></bean>-->
-    <!--<bean id="song2" class="Server.songS2"></bean>-->
+    <!--<bean id="song2" class="Server.songS"></bean>-->
+    <!--<bean id="song3" class="Server.songS2"></bean>-->
     <!--<bean id="mo" class="Model.mo"/>-->
+    <!--<bean id="mo" class="Model.mo" factory-method="getIn"/>-->
 
     <!--自动检测bean  并且自动装配         base-package属性指明扫描的包  -->
     <!--会扫描带有特殊注解的类有
@@ -29,6 +30,7 @@
         <!--<context:include-filter type="regex" expression="Model"/>-->
     </context:component-scan>
 
-    <bean id="mo" class="Model.mo" factory-method="getIn"/>
+    <!--未指定静态方法也能注入?-->
+    <bean id="mo" class="Model.mo"/>
 
 </beans>
