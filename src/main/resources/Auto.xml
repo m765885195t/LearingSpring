@@ -7,8 +7,11 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-    <!--激活自动注解   减少配置的参数       但还需要手动配置bean-->
-    <!--<context:annotation-config />-->
+    <!--激活自动注解      减少配置的参数       但还需要手动配置bean-->
+    <!--他的作用是式地向 Spring 容器注册AutowiredAnnotationBeanPostProcessor、
+    CommonAnnotationBeanPostProcessor、PersistenceAnnotationBeanPostProcessor ,
+    RequiredAnnotationBeanPostProcessor 这4 个BeanPostProcessor。
+    注册这4个 BeanPostProcessor的作用，就是为了你的系统能够识别相应的注解。如@Autowired等-->
     <!--<bean id="autoStu" class="Model.AutoStu"/>-->
     <!--<bean id="song2" class="Server.songS"></bean>-->
     <!--<bean id="song3" class="Server.songS2"></bean>-->
@@ -23,14 +26,15 @@
         @Repository   标识为数据仓库
     -->
     <!--扫描所有的包    关闭默认的过滤器(默认的过滤器会扫描所有注解)-->
-    <context:component-scan base-package="*" annotation-config="false">
-        <!--要扫描的注解              使用Component注解的-->
+    <context:component-scan base-package="Model,Server" annotation-config="false">
+        <!--指定要扫描的注解              使用Component注解的-->
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Component"/>
-        <!--不需要扫描的注解-->
+        <!--不需要扫描的包-->
         <!--<context:include-filter type="regex" expression="Model"/>-->
     </context:component-scan>
 
     <!--未指定静态方法也能注入?-->
     <bean id="mo" class="Model.mo"/>
+    <!--<context:annotation-config />-->
 
 </beans>

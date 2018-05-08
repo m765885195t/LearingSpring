@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@Component("autoStu") //指定Bean的id
+@Component() //指定Bean的id
 public class AutoStu {
     @Value("4")//为int String 等基本方法引入的装配注解
     private int age;
