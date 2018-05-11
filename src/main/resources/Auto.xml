@@ -35,6 +35,6 @@
 
     <!--未指定静态方法也能注入?-->
     <bean id="mo" class="Model.mo"/>
-    <!--<context:annotation-config />-->
+    <context:annotation-config />
 
 </beans>

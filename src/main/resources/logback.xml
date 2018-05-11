@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{100}: %msg%n"/>
+    <property name="LOG_FILE_PATH" value="log" />
+
+    <property name="LOG_FILE_BASE_NAME" value="TT.log" />
+    <appender name="root" class="ch.qos.logback.core.ConsoleAppender">
+        <File>${LOG_FILE_PATH}/${LOG_FILE_BASE_NAME}</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_PATH}/${LOG_FILE_BASE_NAME}.%d{yyyy-MM-dd_HH:mm:ss}</fileNamePattern>
+            <MaxHistory>3</MaxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${PATTERN}</pattern>
+        </layout>
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="root" />
+    </root>
+
+    <property name="STATISTICAL_LOG_FILE_NAME" value="TT.test.log" />
+    <appender name="testloger" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${LOG_FILE_PATH}/${STATISTICAL_LOG_FILE_NAME}</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE_PATH}/${STATISTICAL_LOG_FILE_NAME}.%d{yyyy-MM-dd_HH:mm:ss}</fileNamePattern>
+            <MaxHistory>3</MaxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${PATTERN}</pattern>
+        </layout>
+    </appender>
+    <logger name="Col.testloger" level="INFO" additivity = "false">
+        <appender-ref ref="testloger"/>
+    </logger>
+
+</configuration>
